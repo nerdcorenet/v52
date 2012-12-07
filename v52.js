@@ -49,35 +49,46 @@ v52.prototype = {
 		this.layer.draw()
 	},
 
-//*****CS All Chat stuff is currently based on a firehose.io implementation that won't work very easily
 	chatInit: function(){
 
-		$('#chattext').keypress(function(event) {  
-		    if (event.keyCode == '13') {  
-		        v52Instance.send();  
-		    }  
-		});  
+		//Hook up our mighty websocket
+//*****CS Hardcoded URL is bad
+		var baseurl = 'http://guardian:5353';
+		try{
+			this.chatSocket = io.connect(baseurl + '/chat');
+		}catch(exception){
+			$('#chatLog').append('<p class="warning"> Error:' + exception);
+		}
+
+		//Hook receive message
+		this.chatSocket.on('msg', this.recv);
+
+		//Hook the input box
+		$('#chattext').keypress(function(event){ 
+			if (event.keyCode == '13'){
+				v52Instance.send();
+			}
+		});
 	},
 
 	send: function(){  
+
 		var text = $('#chattext').val();  
 		if(text==""){  
 			$('#chatLog').append('<p class="warning">Please enter a message');  
-			return ;  
+			return;  
 		}  
 		try{  
-			var xhr = new XMLHttpRequest();
-//*****CS hardcoded firehose.io URL
-			xhr.open("PUT", "http://fractalcube.net:7474/test", false);
-			xhr.send(text);
-			alert(xhr.getAllResponseHeaders());
-			$('#chatLog').append('<p class="event">Sent: '+text)  
+			this.chatSocket.emit('msg', text);
 		} catch(exception){  
 			$('#chatLog').append('<p class="warning"> Error:' + exception);  
 		}  
 		$('#chattext').val("");  
 	},
 
+	recv: function(msg){
+		$('#chatLog').append("<p>" + msg +"</p>")
+	}
  
 };
 
