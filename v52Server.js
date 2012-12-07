@@ -1,6 +1,6 @@
 v52Server = new v52_server();
 
-v52_server = function(){
+v52Server = function(){
 	this.static = require('node-static'); 
 
 	this.httpServer = require('http').createServer(this.handleRequest);
@@ -14,7 +14,7 @@ v52_server = function(){
 
 }
 
-v52_server.prototype = {
+v52Server.prototype = {
 	
 	handleRequest: function(request, response) {
 		request.addListener('end', function () {

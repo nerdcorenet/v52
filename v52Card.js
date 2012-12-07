@@ -28,21 +28,21 @@ v52.Card = function(value, suit){
 
 v52.Card.prototype = {
 
-	face_up: function(){
+	faceUp: function(){
 		this.face = 'up';
 		this.visual.setFill({image: this.visual.image});
 	},
 
-	face_down: function(){
+	faceDown: function(){
 		this.face = 'down';
 		this.visual.setFill("green");
 	},
 
 	flip: function(){
 		if(this.face == 'down'){
-			this.face_up();
+			this.faceUp();
 		}else{
-			this.face_down();
+			this.faceDown();
 		}
 	},
 }
