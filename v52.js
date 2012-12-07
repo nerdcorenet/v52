@@ -52,32 +52,6 @@ v52.prototype = {
 //*****CS All Chat stuff is currently based on a firehose.io implementation that won't work very easily
 	chatInit: function(){
 
-		window.WEB_SOCKET_SWF_LOCATION = '/assets/firehose/WebSocketMain.swf';
-
-		this.chatConsumer = new Firehose.Consumer({
-			message: function(msg){
-				$('#chatLog').append('<p class="message">'+msg+"</p>");
-  			},
-
-			connected: function(){
-				$('#chatLog').append('<p class="info">Chat Connected</p>');
-  			},
-
-			disconnected: function(){
-				$('#chatLog').append('<p class="error">Chat Disconnected</p>');
-			},
-
-  			error: function(){
-				$('#chatLog').append('<p class="error">Chat Error');
-  			},
-			// Note that we do NOT specify a protocol here because we don't
-			// know that yet.
-//*****CS hardcoded firehose.io URL
-			uri: '//fractalcube.net:7474/test'
-		})
-		this.chatConsumer.connect();
-
-
 		$('#chattext').keypress(function(event) {  
 		    if (event.keyCode == '13') {  
 		        v52Instance.send();  

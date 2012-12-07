@@ -1,8 +1,25 @@
-var static = require('node-static');
-var file = new(static.Server)('.');
+v52Server = new v52_server();
 
-require('http').createServer(function (request, response) {
-  request.addListener('end', function () {
-    file.serve(request, response);
-  });
-}).listen(5252);
+v52_server = function(){
+	this.static = require('node-static'); 
+
+	this.httpServer = require('http').createServer(this.handleRequest);
+
+	this.fileServer = new(static.Server)();
+
+	this.httpServer.listen(5252);
+
+});
+
+
+}
+
+v52_server.prototype = {
+	
+	handleRequest: function(request, response) {
+		request.addListener('end', function () {
+		    this.fileServer.serve(request, response);
+		}
+	}
+}
+			
