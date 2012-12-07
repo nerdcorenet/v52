@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>CT</title>
-
-		<script src="lib/jquery-1.8.3.min.js"></script> 
-		<script src="lib/kinetic-v4.0.5.js"></script>
-		<script src="/socket.io/socket.io.js"></script>
-
-		<script src="v52.js"></script>
-		<script src="v52Card.js"></script>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title>v52 Cards Login Screen</title>
 	</head>
 
 	<body>
 		<div>
-			<button onclick="v52Instance.drawDeck();">Draw Deck</button>
-		</div>
-		<div id="cardTable"></div>
-		<div id="chat">
-        		<div id="chatLog">  
-		        </div><!-- #chatLog -->  
-        		<input id="chattext" type="text" />  
+			<form name="newGame" action="/newgame" method="post">
+				<p>To <b>Start a new game</b>, enter your name: <input type="text" name="name"/><input type="button" value="New Game"></p>
+			</form>
+
+			<form name="joinGame"  action="/joingame" method="post">
+				<p>To <b>Join a game</b>, enter the game name: <input type="text" name="game" value="testing"/> <b>AND</b> your name: <input type="text" name="name"></p>
+			</form>
 		</div>
 	</body>
 </html>
