@@ -2,22 +2,15 @@
 <html>
 	<head>
 		<title>CT</title>
+
 		<script src="lib/jquery-1.8.3.min.js"></script> 
 		<script src="lib/kinetic-v4.0.5.js"></script>
-		<script src="lib/firehose/json2.js"></script>
-		<script src="lib/firehose/base.js"></script>
-		<script src="lib/firehose/version.js"></script>
-		<script src="lib/firehose/transport.js"></script>
-		<script src="lib/firehose/long_poll.js"></script>
-		<script src="lib/firehose/web_socket.js"></script>
-		<script src="lib/firehose/consumer.js"></script>
-		<script src="lib/firehose/lib/swfobject.js"></script>
-		<script src="lib/firehose/lib/web_socket.js"></script>
+		<script src="node_modules/socket.io/lib/socket.io.js"></script>
+
 		<script src="v52.js"></script>
 		<script src="v52_card.js"></script>
 	</head>
 
-<!--	<body onload="v52Instance = new v52();">  -->
 	<body>
 		<div>
 			<button onclick="v52Instance.drawDeck();">Draw Deck</button>
