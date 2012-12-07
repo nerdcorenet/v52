@@ -42,9 +42,9 @@ v52.prototype = {
 		var i = 0;
 		while(allCards.length > 0){
 			var cardId = (allCards.splice(Math.random() * allCards.length, 1))[0];
-			var card = new v52.Card(cardId[0], cardId[1]);
-			card.visual.attrs.x += i++ * 3;
-			this.layer.add(card.visual);
+			var card = v52.CardView(new v52.Card(cardId[0], cardId[1]));
+			card.view.attrs.x += i++ * 3;
+			this.layer.add(card.view);
 		}
 		this.layer.draw()
 	},

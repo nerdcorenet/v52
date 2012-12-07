@@ -1,41 +1,18 @@
-v52.Card = function(value, suit){ 
+v52.Card = function(value, suit, facing){ 
 
-	this.suit = suit;
-	this.value = value;
-	this.face = 'down';
-
-	this.visual = new Kinetic.Rect({ 
-                                width: 72,
-                                height: 96,
-                                fill: "green",
-                                stroke: "black",
-                                strokeWidth: 1,
-                                draggable: true,
-				x: 0,
-				y: 0
-                        });
-
-	this.visual.v52_parent = this;
-	this.visual.image = new Image();
-	this.visual.image.src = "img/cards-classic/" + this.value + this.suit + ".png";
-	this.visual.on('dblclick', 	
-		function(evt){ 
-			this.v52_parent.flip();
-		}
-	);
-
+	this.suit = suit ? suit : 'Unknown'; //Should be H, C, S, D, or Unknown
+	this.value = value ? value : 'Unknown'; //Should be A,2-10,J,Q,K or Unknown
+	this.face = facing ? facing : 'down'; //Should be'up' or 'down'
 }
 
 v52.Card.prototype = {
 
 	faceUp: function(){
 		this.face = 'up';
-		this.visual.setFill({image: this.visual.image});
 	},
 
 	faceDown: function(){
 		this.face = 'down';
-		this.visual.setFill("green");
 	},
 
 	flip: function(){
