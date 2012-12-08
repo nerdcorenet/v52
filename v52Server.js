@@ -9,8 +9,9 @@ var express = require('express')
 
 var app = express();
 
-//Our modules
-var engine = require('./v52Engine.js');
+//Our top-level modules
+v52Engine = require('./v52Engine.js');
+v52Chat = require('./v52Chat.js');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 5252); 
@@ -35,17 +36,11 @@ app.configure('development', function(){
 
 //Create an HTTP server and bind socket.io to it as well
 var httpServer = http.createServer(app);
-app.v52io = require('socket.io').listen(httpServer);
+var v52io = require('socket.io').listen(httpServer);
 
-//Implement Chat - the easy version ;)
-app.v52chatSocket = app.v52io.of('/chat').on('connection', function(socket){ 
-	socket.on('msg', function(m){
-		app.v52chatSocket.emit('msg', m);
-	})
-});
-
-//Get the engine running
-engine.init(app.v52io);
+//Get the engine and chat running
+v52Engine.init(v52io);
+v52Chat.init(v52io);
 
 //Fire this sucker up
 httpServer.listen(app.get('port'), function(){
