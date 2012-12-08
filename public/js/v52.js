@@ -6,8 +6,8 @@ $(document).ready(function() {
 v52 = function(){
 	this.stage =  new Kinetic.Stage({
 		container: 'cardTable',
-		width: 800,
-		height: 600
+		width: 1024,
+		height: 768
 	})
 
 	this.layer = new Kinetic.Layer();
