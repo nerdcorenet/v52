@@ -52,10 +52,8 @@ v52.prototype = {
 	chatInit: function(){
 
 		//Hook up our mighty websocket
-//*****CS Hardcoded URL is bad
-		var baseurl = 'http://guardian:5353';
 		try{
-			this.chatSocket = io.connect(baseurl + '/chat');
+			this.chatSocket = io.connect('/chat');
 		}catch(exception){
 			$('#chatLog').append('<p class="warning"> Error:' + exception);
 		}
