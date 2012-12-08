@@ -16,6 +16,8 @@ v52 = function(){
 
 	this.chatInit();
 
+	this.engineInit();
+
 }
 
 v52.prototype = {
@@ -47,6 +49,21 @@ v52.prototype = {
 			this.layer.add(card.view);
 		}
 		this.layer.draw()
+	},
+
+	engineInit: function(){
+
+		//Hook up our mighty websocket
+		try{
+			this.engineSocket = io.connect('/engine');
+		}catch(exeption){
+			$('#chatLog').append('<p class="warning">Engine Error:' + exception);
+		}
+
+		//Some event handlers
+		this.engineSocket.on('PONG', function (m){ $('#chatLog').append('<p class="warning">Engine got PONG: ' + m) });
+
+		this.engineSocket.emit('PING');
 	},
 
 	chatInit: function(){

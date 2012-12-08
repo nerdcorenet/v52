@@ -1,12 +1,16 @@
 //USAGE: start is like this
 // PORT=4444 node v52Server.js
 
+//Express modules
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
   , path = require('path');
 
 var app = express();
+
+//Our modules
+var engine = require('./v52Engine.js');
 
 app.configure(function(){
   app.set('port', process.env.PORT || 5252); 
@@ -33,13 +37,15 @@ app.configure('development', function(){
 var httpServer = http.createServer(app);
 app.v52io = require('socket.io').listen(httpServer);
 
-
 //Implement Chat - the easy version ;)
 app.v52chatSocket = app.v52io.of('/chat').on('connection', function(socket){ 
 	socket.on('msg', function(m){
 		app.v52chatSocket.emit('msg', m);
 	})
 });
+
+//Get the engine running
+engine.init(app.v52io);
 
 //Fire this sucker up
 httpServer.listen(app.get('port'), function(){
