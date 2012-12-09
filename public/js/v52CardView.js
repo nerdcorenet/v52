@@ -1,5 +1,5 @@
 //Decorates a card object to be used client-side
-v52.CardView = function(card){
+v52CardView = function(card){
 
 	card.view = new Kinetic.Rect({ 
                                 width: 72,
