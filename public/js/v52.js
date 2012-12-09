@@ -4,18 +4,18 @@ $(document).ready(function() {
 });  
 
 v52 = function(){
+
+	var propornot = 1;
+
 	this.stage =  new Kinetic.Stage({
 		container: 'cardTable',
 		width: 800,
 		height: 600
-	})
-
+	});
 	this.layer = new Kinetic.Layer();
-
 	this.stage.add(this.layer);
 
 	this.chatInit();
-
 	this.engineInit();
 
 }
@@ -44,7 +44,7 @@ v52.prototype = {
 		var i = 0;
 		while(allCards.length > 0){
 			var cardId = (allCards.splice(Math.random() * allCards.length, 1))[0];
-			var card = v52CardView(new v52Card(cardId[0], cardId[1]));
+			var card = v52CardView(new v52Card({value: cardId[0], suit: cardId[1]}));
 			card.view.attrs.x += i++ * 3;
 			this.layer.add(card.view);
 		}
