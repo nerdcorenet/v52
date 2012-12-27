@@ -8,8 +8,8 @@ v52CardView = function(card){
                                 stroke: "black",
                                 strokeWidth: 1,
                                 draggable: true,
-				x: 0,
-				y: 0
+				x: card.posx, //These are currenltly without any scaling for client view window size
+				y: card.posy
                         });
 
 	card.view.v52_parent = card;
@@ -44,6 +44,13 @@ v52CardView = function(card){
 		}
 	}
 
+	//Override the default face_up() action
+/*	card.faceUp(){
+		if(this.suit == 'Unknown' OR this.value == 'Unknown'){
+			v52Client.flipCard(this.cardId);
+		}
+	}
+*/
 	return card;
 }
 
