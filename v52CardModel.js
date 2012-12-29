@@ -16,6 +16,13 @@ v52CardModel = function(card){
 		}
 
 	}
+
+	card.flip = function(){
+		switch(this.facing){
+			case 'up': this.facing = 'down'; break;
+			case 'down': this.facing = 'up'; break;
+		}
+	}
 	
 	return card;
 }

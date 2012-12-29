@@ -16,35 +16,8 @@ v52Card = function(config){
 
 v52Card.prototype = {
 
-	faceUp: function(){
-		this.facing = 'up';
-	},
-
-	faceDown: function(){
-		this.facing = 'down';
-	},
-
+	//Override this in Model/View classes
 	flip: function(){
-		if(this.facing == 'down'){
-			this.faceUp();
-		}else{
-			this.faceDown();
-		}
 	},
-
-	//Returns a version of a card suitable for the client seeing it
-	strip: function(who){
-
-		//Currently does not deal with card ownership, which is a rules things and we don't yet have rules
-		if(who == 'Anyone'){
-			if(this.facing == 'up'){ return this; }
-
-			var safeCard = new v52Card(this);
-			safeCard.suit = 'Unknown';
-			safeCard.value = 'Unknown';
-			return safeCard;
-		}
-
-	}
 
 }

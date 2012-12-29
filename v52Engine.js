@@ -71,8 +71,9 @@ exports.deck = function (){
 exports.flipCard = function(cardID){
 
 	//If we had rules, it is here that we might want to consult them to see who is allowed to flip a card
-	
 	//For today, we will assume that YES, you can flip the card!
-	this.allCards[cardID].flip();
-	allClientsSocket.emit('CARDUPDATE', this.allCards[cardID]);
+	card = this.allCards[cardID];
+	card.flip();
+
+	allClientsSocket.emit('CARDUPDATE', card);
 }
