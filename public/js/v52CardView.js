@@ -45,12 +45,12 @@ v52CardView = function(card){
 	}
 
 	//Override the default face_up() action
-/*	card.faceUp(){
-		if(this.suit == 'Unknown' OR this.value == 'Unknown'){
-			v52Client.flipCard(this.cardId);
+	card.faceUp = function(){
+		if(this.suit == 'Unknown' || this.value == 'Unknown'){
+			v52Client.flipCard(this.cardID);
 		}
 	}
-*/
+
 	return card;
 }
 

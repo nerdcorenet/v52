@@ -7,6 +7,7 @@ var clientSockets = [];
 exports.init = function (io){
 
 	//Some top-level properties for the game engine
+// ***** Copied from v52Client - maybe we want a common include, or even a common game object that could be passed to new players?
 	this.nextObjID = 1; //"Global ObjID for Sets, and Cards"
 	this.players = {}; //Player objects indexed by player# AND name 
 	this.allCards = { 0: {}}; //v52Card objects indexed by ObjID
@@ -15,25 +16,24 @@ exports.init = function (io){
 	allClientsSocket = io.of('/engine');
 	allClientsSocket.on('connection', function(s){
 
+		//Track this new socket
 		clientSockets.push(s);
 
-		s.on('PING', function(m){
-			s.emit('PONG', 'yaya');
-		});
+		//Attach our event handlers to this new socket
+		s.on('PING', function(m){ s.emit('PONG', 'yaya'); });
+		s.on('DECK', function(){ v52Engine.deck(); });
+		s.on('FLIP', function(cardID){ v52Engine.flipCard(cardID); });
 
-		s.on('DECK', function(){
-			v52Engine.deck();
-		});
 	});
 };
 
 exports.deck = function (){
-//function deck(){
-	var allCards = [];
+
+	var possibleCards = [];
 	var suits = ["C","S","H","D"];
 	for(var v=2; v!="DONE"; ){
 		for(var s in suits){
-			allCards.push([v.toString(),suits[s]]);
+			possibleCards.push([v.toString(),suits[s]]);
 		}
 		if(v < 10){
 			v += 1;
@@ -48,12 +48,23 @@ exports.deck = function (){
 		}
 	}
 	var i = 0;
-	while(allCards.length > 0){
-		var cardId = (allCards.splice(Math.random() * allCards.length, 1))[0];
-		var card = new v52CardModel(new v52Card({value: cardId[0], suit: cardId[1], cardID: this.nextObjID++}));
+	while(possibleCards.length > 0){
+
+		var whichCard = (possibleCards.splice(Math.random() * possibleCards.length, 1))[0];
+		var card = new v52CardModel(new v52Card({value: whichCard[0], suit: whichCard[1], cardID: this.nextObjID}));
+		this.allCards[this.nextObjID] = card;
+		this.nextObjID++;
+	
 		card.posx += i++ * 3;
 		allClientsSocket.emit('CARD', card.strip('Anyone'));
 	}
 };
 
+exports.flipCard = function(cardID){
 
+	//If we had rules, it is here that we might want to consult them to see who is allowed to flip a card
+	
+	//For today, we will assume that YES, you can flip the card!
+	this.allCards[cardID].flip();
+	allClientsSocket.emit('CARDUPDATE', this.allCards[cardID]);
+}
