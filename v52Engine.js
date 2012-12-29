@@ -50,7 +50,7 @@ exports.deck = function (){
 	var i = 0;
 	while(allCards.length > 0){
 		var cardId = (allCards.splice(Math.random() * allCards.length, 1))[0];
-		var card = new v52CardModel(new v52Card({value: cardId[0], suit: cardId[1]}));
+		var card = new v52CardModel(new v52Card({value: cardId[0], suit: cardId[1], cardID: this.nextObjID++}));
 		card.posx += i++ * 3;
 		allClientsSocket.emit('CARD', card.strip('Anyone'));
 	}
