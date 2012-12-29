@@ -24,6 +24,14 @@ exports.init = function (io){
 		s.on('DECK', function(){ v52Engine.deck(); });
 		s.on('FLIP', function(cardID){ v52Engine.flipCard(cardID); });
 
+		s.on('CARDMOVE', function(cardID, x, y){ 
+			with(v52Engine.allCards[cardID]){ 
+				posx=x; posy=y 
+			} 
+
+			s.broadcast.emit('CARDUPDATE', v52Engine.allCards[cardID].strip('Anyone'));
+		});
+
 	});
 };
 

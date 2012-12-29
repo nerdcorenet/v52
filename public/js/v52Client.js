@@ -39,3 +39,6 @@ v52Client.init = function(){
 v52Client.getDeck = function(){ this.clientSocket.emit('DECK'); };
 
 v52Client.flipCard = function(cardID){ this.clientSocket.emit('FLIP', cardID); }
+
+v52Client.sendMove = function(cardID, newx, newy){ this.clientSocket.emit('CARDMOVE', cardID, newx, newy); }
+
