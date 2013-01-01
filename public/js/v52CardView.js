@@ -1,4 +1,7 @@
 //Decorates a card object to be used client-side
+
+//This implementation uses Kinetic.js
+//  API: http://kineticjs.com/docs/symbols/Kinetic.php
 v52CardView = function(card){
 
 	card.view = new Kinetic.Rect({ 
@@ -14,6 +17,11 @@ v52CardView = function(card){
 
 	card.view.v52_parent = card;
 	card.view.image = new Image();
+
+	//Raise when touched
+	card.view.on('mousedown touchstart dragstart', function(evt){
+		this.moveToTop();
+	});
 
 	//Flip on DBLClick
 	card.view.on('dblclick', function(evt){ 
