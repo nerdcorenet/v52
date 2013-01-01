@@ -13,7 +13,7 @@ v52ChatClient.init = function (){
 	this.chatSocket.on('msg', this.recv);
 
 	//Hook the input box
-	$('#chattext').keypress(function(event){ 
+	$('#chatText').keypress(function(event){ 
 		if (event.keyCode == '13'){
 			v52ChatClient.send();
 		}
@@ -22,7 +22,7 @@ v52ChatClient.init = function (){
 
 v52ChatClient.send = function (){
 
-	var text = $('#chattext').val();  
+	var text = $('#chatText').val();  
 	if(text==""){  
 		$('#chatLog').append('<p class="warning">Please enter a message');  
 		return;  
@@ -34,10 +34,11 @@ v52ChatClient.send = function (){
 		$('#chatLog').append('<p class="warning"> Error:' + exception);  
 	}  
 
-	$('#chattext').val("");  
+	$('#chatText').val("");  
 };
 
 v52ChatClient.recv = function (m){
 
-	$('#chatLog').append("<p>" + m +"</p>")
+	$('#chatLog').append('<p class="chatLine">' + m +"</p>");
+	$("#chatLog").scrollTop($("#chatLog").scrollTop() + 100);
 };
