@@ -1,4 +1,7 @@
 //Decorates a card object to be used client-side
+
+//This implementation uses Kinetic.js
+//  API: http://kineticjs.com/docs/symbols/Kinetic.php
 v52CardView = function(card){
 
 	card.view = new Kinetic.Rect({ 
