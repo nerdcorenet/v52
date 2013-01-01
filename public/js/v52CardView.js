@@ -9,7 +9,7 @@ v52CardView = function(card){
                                 height: 96,
                                 fill: "green",
                                 stroke: "black",
-                                strokeWidth: 1,
+                                strokeWidth: 0,
                                 draggable: true,
 				x: card.posx, //These are currenltly without any scaling for client view window size
 				y: card.posy
@@ -17,6 +17,7 @@ v52CardView = function(card){
 
 	card.view.v52_parent = card;
 	card.view.image = new Image();
+	card.view.setFill({image: v52Instance.cardBack});
 
 	//Raise when touched
 	card.view.on('mousedown touchstart dragstart', function(evt){
@@ -50,7 +51,6 @@ v52CardView = function(card){
 			}
 			var updateFn = function (){ 
 				card.view.setFill({image: card.view.image});
-				v52Instance.layer.draw();
 			};
 
 			if(this.view.image.complete){
@@ -59,9 +59,9 @@ v52CardView = function(card){
 				this.view.image.onload = updateFn;
 			}
 		}else{
-			this.view.setFill("green");
-			v52Instance.layer.draw();
+			this.view.setFill({image: v52Instance.cardBack});
 		}
+		v52Instance.layer.draw();
 	}
 
 	card.flip = function(){ v52Client.flipCard(this.cardID); }
