@@ -9,6 +9,7 @@ exports.init = function (io){
 		s.on('msg', function(m){
 
 			//***** A "temporary" way to access a server-side Fn. It will expand and then hopefully it will disappear
+			//Maybe it could survive for things like /invite and /ban
 			switch(m){
 				case '/deck': v52Engine.deck(); break;
 			}

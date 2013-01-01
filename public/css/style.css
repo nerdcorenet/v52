@@ -1,8 +1,26 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 5px;
+  font: 14px 
 }
 
 a {
   color: #00B7FF;
+}
+
+#chat {
+ width: 800px;
+}
+
+#chatLog {
+ height: 100px;
+ overflow-y: scroll;
+}
+
+#chatText{
+ width: 100%;
+}
+
+.chatLine{
+ margin-top: 5px;
+ margin-bottom: 5px;
 }
