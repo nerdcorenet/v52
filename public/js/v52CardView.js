@@ -51,6 +51,7 @@ v52CardView = function(card){
 			}
 			var updateFn = function (){ 
 				card.view.setFill({image: card.view.image});
+				v52Instance.layer.draw();
 			};
 
 			if(this.view.image.complete){
