@@ -9,10 +9,6 @@ var express = require('express')
 
 var app = express();
 
-//Our top-level modules
-v52Engine = require('./v52Engine.js');
-v52Chat = require('./v52Chat.js');
-
 app.configure(function(){
   app.set('port', process.env.PORT || 5252); 
   app.set('views', __dirname + '/views');
@@ -51,8 +47,10 @@ var httpServer = http.createServer(app);
 var v52io = require('socket.io').listen(httpServer);
 
 //Get the engine and chat running
-v52Engine.init(v52io);
-v52Chat.init(v52io);
+engine = require('./v52Engine.js');
+engine.init(v52io);
+chat = require('./v52Chat.js');
+chat.init(v52io, engine);
 
 //Fire this sucker up
 httpServer.listen(app.get('port'), function(){

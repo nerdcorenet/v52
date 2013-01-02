@@ -13,6 +13,8 @@ exports.init = function (io){
 	this.allCards = { 0: {}}; //v52Card objects indexed by ObjID
 	this.allSets = {0: {}}; //For when we implement sets
 
+	this_engine = this;
+
 	allClientsSocket = io.of('/engine');
 	allClientsSocket.on('connection', function(s){
 
@@ -21,15 +23,15 @@ exports.init = function (io){
 
 		//Attach our event handlers to this new socket
 		s.on('PING', function(m){ s.emit('PONG', 'yaya'); });
-		s.on('DECK', function(){ v52Engine.deck(); });
-		s.on('FLIP', function(cardID){ v52Engine.flipCard(cardID); });
+		s.on('DECK', function(){ this_engine.deck(); });
+		s.on('FLIP', function(cardID){ this_engine.flipCard(cardID); });
 
 		s.on('CARDMOVE', function(cardID, x, y){ 
-			with(v52Engine.allCards[cardID]){ 
+			with(this_engine.allCards[cardID]){ 
 				posx=x; posy=y 
 			} 
 
-			s.broadcast.emit('CARDUPDATE', v52Engine.allCards[cardID].strip('Anyone'));
+			s.broadcast.emit('CARDUPDATE', this_engine.allCards[cardID].strip('Anyone'));
 		});
 
 	});
