@@ -17,8 +17,8 @@ app.configure(function(){
   app.set('port', process.env.PORT || 5252); 
   app.set('views', __dirname + '/views');
   app.set('view engine', 'hjs');
-  app.use(express.favicon());
   app.use(express.logger('dev'));
+  app.use(express.favicon());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
@@ -31,8 +31,20 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-//Will set up routing later 
-//app.get('/', routes.index);
+//Auto-load our routing modules, they handle their own app.VERB() additions through the init functions
+//LICENSE: This code taken from: http://blog.pixelingene.com/2012/06/a-simple-organization-scheme-for-expressjs-apps/ (Jan 1 2013)
+var fs = require('fs');
+var path = require('path');
+
+var RouteDir = 'routes';
+var files = fs.readdirSync(RouteDir);
+
+files.forEach(function (file) {
+	if(file[0] == '.'){ return; }
+	var filePath = path.resolve('./', RouteDir, file),
+	route = require(filePath);
+	route.init(app);
+});
 
 //Create an HTTP server and bind socket.io to it as well
 var httpServer = http.createServer(app);
