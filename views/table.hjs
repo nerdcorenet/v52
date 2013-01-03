@@ -13,6 +13,7 @@
 		<script src="/js/v52CardView.js"></script>
 		<script src="/js/v52Client.js"></script>
 		<script src="/js/v52ChatClient.js"></script>
+		<script src="/js/v52Game.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
 	</head>

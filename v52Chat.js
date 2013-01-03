@@ -2,8 +2,8 @@
 var allClientsSocket;
 var clientSockets = [];
 
-exports.init = function (io,engine){
-	allClientsSocket = io.of('/chat');
+exports.init = function (engine){
+	allClientsSocket = global.io.of('/chat');
 	allClientsSocket.on('connection', function(s){
 		clientSockets.push(s);
 		s.on('msg', function(m){

@@ -1,7 +1,8 @@
 exports.init = function(app){
 
   app.post('/newGame', function(req, res){
-	res.render('index', { title: 'I got your new game right here: ' + req.param('name') });
+	
+	res.render('table', { gameHash: req.param('gameHash') });
   });
 
   //A page that asks for your name and posts to same URL
