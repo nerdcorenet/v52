@@ -2,23 +2,21 @@ require('./v52Card.js');
 require('./v52CardModel.js');
 require('./v52Game.js');
 
-var allClientsSocket;
-var clientSockets = [];
+v52Engine = function(gameID){
 
-exports.init = function (gameID){
-
-	this_engine = this;
+	var this_engine = this;
 
 	this.gameID = gameID;
 	this.game = new v52Game();
 
 	this.nextObjID = 1; //"Global ObjID for Sets, and Cards"
 
-	allClientsSocket = io.of('/engine/' + gameID);
-	allClientsSocket.on('connection', function(s){
+	this.clientSockets = [];
+	this.allClientsSocket = io.of('/engine/' + gameID);
+	this.allClientsSocket.on('connection', function(s){
 
 		//Track this new socket
-		clientSockets.push(s);
+		this_engine.clientSockets.push(s);
 
 		//Attach our event handlers to this new socket
 		s.on('PING', function(m){ s.emit('PONG', 'yaya'); });
@@ -27,16 +25,16 @@ exports.init = function (gameID){
 
 		s.on('CARDMOVE', function(cardID, x, y){ 
 			with(this_engine.game.allCards[cardID]){ 
-				posx=x; posy=y 
+				posx=x; posy=y; 
 			} 
 
 			s.broadcast.emit('CARDUPDATE', this_engine.game.allCards[cardID].strip('Anyone'));
 		});
 
 	});
-};
+}
 
-exports.deck = function (){
+v52Engine.prototype.deck = function (){
 
 	var possibleCards = [];
 	var suits = ["C","S","H","D"];
@@ -65,16 +63,16 @@ exports.deck = function (){
 		this.nextObjID++;
 	
 		card.posx += i++ * 3;
-		allClientsSocket.emit('CARD', card.strip('Anyone'));
+		this.allClientsSocket.emit('CARD', card.strip('Anyone'));
 	}
-};
+}
 
-exports.flipCard = function(cardID){
+v52Engine.prototype.flipCard = function(cardID){
 
 	//If we had rules, it is here that we might want to consult them to see who is allowed to flip a card
 	//For today, we will assume that YES, you can flip the card!
 	card = this.game.allCards[cardID];
 	card.flip();
 
-	allClientsSocket.emit('CARDUPDATE', card);
+	this.allClientsSocket.emit('CARDUPDATE', card);
 }

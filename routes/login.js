@@ -1,20 +1,20 @@
-var crypto = require('crypto');
+require('../v52Engine.js');
+require('../v52Chat.js');
 
 exports.init = function(app){
 
   app.post('/new', function(req, res){
 
 	//Generate a new gameID similar to how socket.io makes IDs
+	var crypto = require('crypto');
 	var rand = new Buffer(15);
 	rand.writeInt32BE((new Date()).getTime() | 0, 11);
 	crypto.randomBytes(12).copy(rand);
 	var gameID = rand.toString('base64').replace(/\//g, '_').replace(/\+/g, '-');
 
 	//*****CS IMPORTANT: THESE OBJECTS LEAK. There is nothing (yet!) that cleans up games
-	var engine = require('../v52Engine.js');
-	engine.init(gameID);
-	var chat = require('../v52Chat.js');
-	chat.init(engine);
+	var engine = new v52Engine(gameID);
+	var chat = new v52Chat(engine);
 
 	engine.game.players.push(req.param('name'));
 

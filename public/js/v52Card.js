@@ -17,7 +17,6 @@ v52Card = function(config){
 v52Card.prototype = {
 
 	//Override this in Model/View classes
-	flip: function(){
-	},
+	flip: function(){},
 
 }
