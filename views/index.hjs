@@ -21,7 +21,6 @@
 				<li><a href="join/{{gameID}}">{{gameID}} started by {{owner}} at {{startTime}}</a></li>
 				{{/games}}
 			</ul>
-			<p>For now you can just go directly to the table since this stuff doesn't work. <a href="main.html">GO TO TABLE SINCE THIS STUFF DOESN'T WORK!</a>
 		</div>
 	</body>
 </html>
