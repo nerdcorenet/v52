@@ -1,10 +1,10 @@
 v52ChatClient = {};
 
-v52ChatClient.init = function (){
+v52ChatClient.init = function (gameID){
 
 	//Hook up our mighty websocket
 	try{
-		this.chatSocket = io.connect('/chat');
+		this.chatSocket = io.connect('/chat/' + gameID);
 	}catch(exception){
 		$('#chatLog').append('<p class="warning"> Error:' + exception);
 	}

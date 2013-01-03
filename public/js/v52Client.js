@@ -1,13 +1,13 @@
 v52Client = {};
 
-v52Client.init = function(){
+v52Client.init = function(gameID){
 
 	//Game state object
 	this.game = new v52Game;
 
 	//Hook up our mighty websocket
 	try{
-		this.clientSocket = io.connect('/engine');
+		this.clientSocket = io.connect('/engine/' + gameID);
 	}catch(exeption){
 		$('#chatLog').append('<p class="warning">Engine Error:' + exception);
 	}

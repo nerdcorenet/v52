@@ -5,15 +5,16 @@ require('./v52Game.js');
 var allClientsSocket;
 var clientSockets = [];
 
-exports.init = function (){
+exports.init = function (gameID){
 
 	this_engine = this;
 
+	this.gameID = gameID;
 	this.game = new v52Game();
 
 	this.nextObjID = 1; //"Global ObjID for Sets, and Cards"
 
-	allClientsSocket = io.of('/engine');
+	allClientsSocket = io.of('/engine/' + gameID);
 	allClientsSocket.on('connection', function(s){
 
 		//Track this new socket

@@ -49,16 +49,6 @@ global.io = require('socket.io').listen(httpServer);
 //Track all our games
 global.games = [];
 
-//*****TESTING ONLY
-global.games.push({ gameHash: "aabbccdd", owner: "chris", startTime: new Date() });
-global.games.push({ gameHash: "zzyyxxww", owner: "mike", startTime: new Date() });
-
-//Get the engine and chat running
-engine = require('./v52Engine.js');
-engine.init();
-chat = require('./v52Chat.js');
-chat.init(engine);
-
 //Fire this sucker up
 httpServer.listen(app.get('port'), function(){
 	console.log("Express server listening on port " + app.get('port'));

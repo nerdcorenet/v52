@@ -1,9 +1,5 @@
-//JQuery event handler
-$(document).ready(function() {  
-    v52Instance = new v52();
-});  
 
-v52 = function(){
+v52 = function(gameID){
 
 	this.stage =  new Kinetic.Stage({
 		container: 'cardTable',
@@ -15,8 +11,8 @@ v52 = function(){
 	this.cardBack = new Image();
 	this.cardBack.src = "/img/backs/bkkgraff.png";
 
-	v52Client.init();
-	v52ChatClient.init();
+	v52Client.init(gameID);
+	v52ChatClient.init(gameID);
 }
 
 v52.prototype = {

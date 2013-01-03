@@ -15,11 +15,18 @@
 		<script src="/js/v52ChatClient.js"></script>
 		<script src="/js/v52Game.js"></script>
 
+		<script>
+			//JQuery event handler starts the show
+			$(document).ready(function() {
+				v52Instance = new v52('{{gameID}}');
+			});
+		</script>
+
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
 	</head>
 
 	<body>
-		<h1>Congrats on joining {{gameHash}}</h1>
+		<h1>Congrats on joining {{gameID}}</h1>
 		<div>
 			<button onclick="v52Client.getDeck();">Draw Deck</button>
 		</div>
