@@ -44,13 +44,20 @@ files.forEach(function (file) {
 
 //Create an HTTP server and bind socket.io to it as well
 var httpServer = http.createServer(app);
-var v52io = require('socket.io').listen(httpServer);
+var io = require('socket.io').listen(httpServer);
+
+//We need some global variables to track things
+global.games = [];
+
+//*****TESTING ONLY
+global.games.push({ gameHash: "aabbccdd", owner: "chris", startTime: new Date() });
+global.games.push({ gameHash: "zzyyxxww", owner: "mike", startTime: new Date() });
 
 //Get the engine and chat running
 engine = require('./v52Engine.js');
-engine.init(v52io);
+engine.init(io);
 chat = require('./v52Chat.js');
-chat.init(v52io, engine);
+chat.init(io, engine);
 
 //Fire this sucker up
 httpServer.listen(app.get('port'), function(){

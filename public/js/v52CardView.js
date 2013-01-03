@@ -45,9 +45,9 @@ v52CardView = function(card){
 
 		if(this.facing == 'up'){
 			if(this.suit == "Unknown" || this.value == "Unknown"){
-				this.view.image.src = "img/cards-classic/unknown.png";
+				this.view.image.src = "/img/cards-classic/unknown.png";
 			}else{
-				this.view.image.src = "img/cards-classic/" + this.value + this.suit + ".png";
+				this.view.image.src = "/img/cards-classic/" + this.value + this.suit + ".png";
 			}
 			var updateFn = function (){ 
 				card.view.setFill({image: card.view.image});

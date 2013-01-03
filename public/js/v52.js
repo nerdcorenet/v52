@@ -13,7 +13,7 @@ v52 = function(){
 	this.layer = new Kinetic.Layer();
 	this.stage.add(this.layer);
 	this.cardBack = new Image();
-	this.cardBack.src = "img/backs/bkkgraff.png";
+	this.cardBack.src = "/img/backs/bkkgraff.png";
 
 	v52Client.init();
 	v52ChatClient.init();
