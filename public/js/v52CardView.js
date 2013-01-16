@@ -22,6 +22,7 @@ v52CardView = function(card){
 	//Raise when touched
 	card.view.on('mousedown touchstart dragstart', function(evt){
 		this.moveToTop();
+		card.sendUpdate();
 	});
 
 	//Flip on DBLClick
@@ -31,11 +32,16 @@ v52CardView = function(card){
 
 	//Tell the server when we're being dragged around
 	card.view.on('dragmove', function(evt){
+		card.sendUpdate();
+	});
+
+	card.sendUpdate = function(){ 
 		card.posx = card.view.attrs.x; //These are currenltly without any scaling for client view window size
 		card.posy = card.view.attrs.y;
+		card.posz = card.view.getZIndex();
 
-		v52Client.sendMove(card.cardID, card.posx, card.posy);
-	});
+		v52Client.sendMove(card.cardID, card.posx, card.posy, card.posz);
+	}
 
 	//*****CS Would it be better/possible to do this by hooking the Kinetic Draw function? (whatever it's called)
 	card.refresh = function(){

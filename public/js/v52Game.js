@@ -1,7 +1,12 @@
 //Data-only object representing the entire game state
-v52Game = function(){
-	
+v52Game = function(config){
+
         this.players = []; //Player names
-        this.allCards = { 0: {}}; //v52Card objects indexed by ObjID
-        this.allSets = {0: {}}; //For when we implement sets	
+        this.allCards = {}; //v52Card objects **indexed by ObjID**
+        this.allSets = {}; //For when we implement sets	
+
+	for(var prop in config){
+		this[prop] = config[prop];
+	}
+	
 }
