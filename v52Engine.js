@@ -37,31 +37,14 @@ v52Engine = function(gameID){
 
 v52Engine.prototype.deck = function (){
 
-	var possibleCards = [];
-	var suits = ["C","S","H","D"];
-	for(var v=2; v!="DONE"; ){
-		for(var s in suits){
-			possibleCards.push([v.toString(),suits[s]]);
-		}
-		if(v < 10){
-			v += 1;
-		}else{
-			switch(v){
-				case 10: v = "J"; break;
-					 case "J": v = "Q"; break;
-					 case "Q": v = "K"; break;
-					 case "K": v = "A"; break;
-					 case "A": v = "DONE"; break;
-			}
-		}
-	}
+	var possibleCards = [["2","C"],["2","S"],["2","H"],["2","D"],["3","C"],["3","S"],["3","H"],["3","D"],["4","C"],["4","S"],["4","H"],["4","D"],["5","C"],["5","S"],["5","H"],["5","D"],["6","C"],["6","S"],["6","H"],["6","D"],["7","C"],["7","S"],["7","H"],["7","D"],["8","C"],["8","S"],["8","H"],["8","D"],["9","C"],["9","S"],["9","H"],["9","D"],["10","C"],["10","S"],["10","H"],["10","D"],["J","C"],["J","S"],["J","H"],["J","D"],["Q","C"],["Q","S"],["Q","H"],["Q","D"],["K","C"],["K","S"],["K","H"],["K","D"],["A","C"],["A","S"],["A","H"],["A","D"]];
+
 	var i = 0;
 	while(possibleCards.length > 0){
 
 		var whichCard = (possibleCards.splice(Math.random() * possibleCards.length, 1))[0];
 		var card = new v52CardModel(new v52Card({value: whichCard[0], suit: whichCard[1], cardID: this.nextObjID}));
-		this.game.allCards[this.nextObjID] = card;
-		this.nextObjID++;
+		this.game.allCards[this.nextObjID++] = card;
 	
 		card.posx += i++ * 3;
 		this.allClientsSocket.emit('CARD', card.strip('Anyone'));
