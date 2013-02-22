@@ -50,6 +50,7 @@ v52Client.newCard = function(c){
 	var card = v52CardView(new v52Card(c));
 	v52Client.game.allCards[card.cardID] = card;
 	v52Instance.layer.add(card.view);
+	v52Instance.layer.add(card.view.baseToken);
 	v52Instance.layer.draw();
 	if(card.facing == "up"){ card.refresh(); }
 }
@@ -60,3 +61,4 @@ v52Client.flipCard = function(cardID){ this.clientSocket.emit('FLIP', cardID); }
 
 v52Client.sendMove = function(cardID, newx, newy, newz){ this.clientSocket.emit('CARDMOVE', cardID, newx, newy, newz); }
 
+v52Client.tokenizeCard = function(cardID){ this.clientSocket.emit('TOKENIZE', cardID); }
