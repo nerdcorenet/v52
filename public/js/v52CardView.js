@@ -26,7 +26,7 @@ v52CardView = function(card){
 			});
 	//NOTE: baseToken.image does not get inherited during a Kinetic.Rect.clone()
 	card.view.baseToken.image = new Image();
-	card.view.baseToken.image.src = "/img/tokens/horrible.png";
+	card.view.baseToken.image.src = "/img/tokens/v52token.png";
 	card.view.tokens = new Array();
 
 	card.view.v52_parent = card;
