@@ -12,11 +12,13 @@ v52Card = function(config){
 	if(!this.posx){ this.posx = 0 } //These are "Virtual" co-ordinates, not necesarrily the physical pixel coords on the client	
 	if(!this.posy){ this.posy = 0 } //If the card becomes part of a set, these become an offset from the set's default layout position of the card
 	if(!this.posz){ this.posz = 0 }	//Unless you're playing a "free-form" game, these should be 0,0 in most cases
+	if(!this.tokens){ this.tokens = 0 } //Initial card tokens
 }
 
 v52Card.prototype = {
 
 	//Override this in Model/View classes
 	flip: function(){},
+	tokenize: function(){},
 
 }

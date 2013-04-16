@@ -23,6 +23,7 @@ v52Engine = function(gameID){
 		s.on('PING', function(m){ this_engine.sendGame(s); });
 		s.on('DECK', function(){ this_engine.deck(); });
 		s.on('FLIP', function(cardID){ this_engine.flipCard(cardID); });
+		s.on('TOKENIZE', function(cardID){ this_engine.tokenizeCard(cardID); });
 
 		s.on('CARDMOVE', function(cardID, x, y, z){ 
 			with(this_engine.game.allCards[cardID]){ 
@@ -57,6 +58,13 @@ v52Engine.prototype.flipCard = function(cardID){
 	//For today, we will assume that YES, you can flip the card!
 	card = this.game.allCards[cardID];
 	card.flip();
+
+	this.allClientsSocket.emit('CARDUPDATE', card);
+}
+
+v52Engine.prototype.tokenizeCard = function(cardID){
+	card = this.game.allCards[cardID];
+	card.tokenize();
 
 	this.allClientsSocket.emit('CARDUPDATE', card);
 }

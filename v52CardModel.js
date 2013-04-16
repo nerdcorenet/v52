@@ -23,6 +23,14 @@ v52CardModel = function(card){
 			case 'down': this.facing = 'up'; break;
 		}
 	}
+
+	card.tokenize = function(){
+		if(card.tokens < 12){
+			card.tokens++;
+		} else {
+			card.tokens = 0;
+		}
+	}
 	
 	return card;
 }

@@ -10,6 +10,7 @@ v52 = function(gameID){
 	this.stage.add(this.layer);
 	this.cardBack = new Image();
 	this.cardBack.src = "/img/backs/bkkgraff.png";
+	this.cardMaxTokens = 12;
 
 	v52Client.init(gameID);
 	v52ChatClient.init(gameID);
